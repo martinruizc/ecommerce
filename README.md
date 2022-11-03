@@ -1,1 +1,4 @@
-#Ecomeerce MERN
+# Ecomeerce - Swimfast
+
+- Stack: MERN
+- Misión-Tic-2022 
