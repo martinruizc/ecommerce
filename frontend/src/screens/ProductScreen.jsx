@@ -1,7 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
-import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
+import { Link, useParams, useNavigate } from 'react-router-dom'
+import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { Raiting } from '../components/Raiting'
 import { listProductDetails } from '../actions/productAction'
 import { Loading } from '../components/Loading'
@@ -9,16 +9,23 @@ import { Message } from '../components/Message'
 
 
 export const ProductScreen = ({ match }) => {
+  const [quantity, setQuantity] = useState(1)
+
   const dispatch = useDispatch()
   const productDetails = useSelector(state => state.productDetails)
   const { loading, error, product } = productDetails
 
   const params = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(listProductDetails(params.id))
-  }, [dispatch, match])
+  }, [dispatch])
 
+
+  const submitHandler = () => {
+    navigate(`/cart/${params.id}?qty=${quantity}`)
+  }
 
   return (
     <>
@@ -68,8 +75,38 @@ export const ProductScreen = ({ match }) => {
                         <Col>{product.countInStock > 0 ? 'Disponible' : 'Agotado'}</Col>
                       </Row>
                     </ListGroup.Item>
+
+                    {product.countInStock > 0 && (
+                      <ListGroup.Item>
+                        <Row>
+                          <Col>
+                            Cantidad:
+                          </Col>
+                          <Col>
+                            <Form.Control as='select' value={quantity} onChange={(e) => setQuantity(e.target.value)}>
+                              {[...Array(product.countInStock).keys()].map(x => (
+                                <option key={x + 1}>{x + 1}</option>
+                              ))}
+                            </Form.Control>
+
+                          </Col>
+
+                        </Row>
+
+                      </ListGroup.Item>
+                    )}
+
+
+
                     <ListGroup.Item>
-                      <Button className='btn-block' type='button' disabled={product.countInStock === 0}>Agregar</Button>
+                      <Button
+                        onClick={submitHandler}
+                        className='btn-block'
+                        type='button'
+                        disabled={product.countInStock === 0}
+                      >
+                        Agregar
+                      </Button>
                     </ListGroup.Item>
                   </ListGroup>
                 </Card>
