@@ -44,7 +44,7 @@ export const CartScreen = ({ match, lacation, history }) => {
         <Col md={8}>
           <h1>Tus compras</h1>
           {cartItems.length === 0
-            ? <Message variant='red'>Carro Vacío</Message>
+            ? <Message variant='danger'>Carro Vacío</Message>
             : (
               <ListGroup variant='flush'>
                 {cartItems.map(item => (

@@ -5,6 +5,7 @@ import { Header } from "./components/Header"
 import { HomeScreen } from "./screens/HomoScreen"
 import { ProductScreen } from "./screens/ProductScreen"
 import { CartScreen } from './screens/CartScreen'
+import { LoginScreen } from "./screens/LoginScreen"
 
 
 export const App = () => {
@@ -15,6 +16,7 @@ export const App = () => {
         <Container>
           <Routes>
             <Route path="/" element={<HomeScreen />} exact />
+            <Route path="/login" element={<LoginScreen />} />
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/cart/" element={<CartScreen />} />
             <Route path="/cart/:id" element={<CartScreen />} />
