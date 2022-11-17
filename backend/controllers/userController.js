@@ -51,6 +51,42 @@ export const getUserProfile = asyncHandler(async (req, res) => {
 
 })
 
+
+// User Update Profile 
+// PUT /api/users/profile
+
+export const updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id)
+
+  if (user) {
+    user.first_name = req.body.first_name || user.first_name
+    user.last_name = req.body.last_name || user.last_name
+    user.email = req.body.email || user.email
+    if (req.body.password) {
+      user.password = req.body.password
+    }
+
+    const updatedUser = await user.save()
+
+    res.json({
+      _id: updatedUser._id,
+      first_name: updatedUser.first_name,
+      last_name: updatedUser.last_name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token: generateToken(updatedUser._id),
+    })
+
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+
+})
+
+
+
+
 // User Register user
 // POST /api/users/
 
@@ -88,3 +124,4 @@ export const registerUser = asyncHandler(async (req, res) => {
   }
 
 })
+

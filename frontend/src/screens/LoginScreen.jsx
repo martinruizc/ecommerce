@@ -8,6 +8,7 @@ import { login } from '../actions/userAction'
 import { FormContainer } from "../components/FormContainer"
 
 
+
 export const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -35,6 +36,7 @@ export const LoginScreen = () => {
 
 
   return (
+
     <FormContainer>
       <h1>Iniciar Sesión</h1>
       {error && <Message variant={'danger'}>{error}</Message>}
@@ -63,6 +65,7 @@ export const LoginScreen = () => {
       </Row>
 
     </FormContainer >
+
   )
 
 
