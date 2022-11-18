@@ -8,6 +8,8 @@ import { CartScreen } from './screens/CartScreen'
 import { LoginScreen } from "./screens/LoginScreen"
 import { RegisterScreen } from "./screens/RegisterScreen"
 import { ProfileScreen } from './screens/ProfileScreen'
+import { ShippingScreen } from "./screens/ShippingScreen"
+
 
 
 export const App = () => {
@@ -24,6 +26,7 @@ export const App = () => {
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/cart/" element={<CartScreen />} />
             <Route path="/cart/:id" element={<CartScreen />} />
+            <Route path="/shipping" element={<ShippingScreen />} />
           </Routes>
         </Container>
       </main>

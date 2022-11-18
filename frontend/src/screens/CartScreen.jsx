@@ -1,19 +1,22 @@
 import { useEffect } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { Link, useParams, useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import { Message } from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartAction'
+import { } from '../actions/userAction'
 import { Cupon } from '../components/Cupon'
 import { numberWithCommas } from './helpers/numberComm'
 
 
 
-export const CartScreen = ({ match, lacation, history }) => {
+export const CartScreen = ({ }) => {
   const params = useParams()
   const navigate = useNavigate()
   const productId = params.id
 
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
 
   const qty = location.search ? Number(location.search.split('=')[1]) : 1
 
@@ -31,7 +34,12 @@ export const CartScreen = ({ match, lacation, history }) => {
   }, [dispatch, productId, qty])
 
   const checkoutHandler = () => {
-    navigate('/login?redirect=sipping')
+    if (!userInfo) {
+      navigate('/login?redirect=shipping')
+
+    } else {
+      navigate('/shipping')
+    }
   }
 
   const removeItemHandler = (id) => {
