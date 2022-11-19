@@ -18,9 +18,9 @@ export const PlaceOrderScreen = () => {
   //Operations Cost
   cart.itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
 
-  cart.shippingPrice = cart.itemsPrice > 150000 ? 0 : 10800
+  cart.shippingPrice = (cart.itemsPrice > 150000 ? 0 : 10800)
 
-  cart.taxPrice = cart.itemsPrice * 0.19
+  cart.taxPrice = 0.19 * cart.itemsPrice
 
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice
 
@@ -29,7 +29,7 @@ export const PlaceOrderScreen = () => {
 
   useEffect(() => {
     if (success) {
-      navigate(`/orders/${order._id}`)
+      navigate(`/order/${order._id}`)
     }
 
   }, [navigate, success])
@@ -45,14 +45,6 @@ export const PlaceOrderScreen = () => {
       totalPrice: cart.totalPrice,
     }))
   }
-
-
-
-
-
-
-
-
 
   return (
     <>

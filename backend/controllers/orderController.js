@@ -9,7 +9,7 @@ import { Order } from '../models/orderModel.js'
 
 export const addOrderItems = asyncHandler(async (req, res) => {
 
-  const { orderItems, shippingAddress, paymentMethod, itmesPrice, shippingPrice, totalPrice } = req.body
+  const { orderItems, shippingAddress, paymentMethod, itemsPrice, shippingPrice, totalPrice, taxPrice } = req.body
 
   if (orderItems && orderItems.length === 0) {
     res.status(400)
@@ -21,8 +21,9 @@ export const addOrderItems = asyncHandler(async (req, res) => {
       user: req.user._id,
       shippingAddress,
       paymentMethod,
-      itmesPrice,
+      itemsPrice,
       shippingPrice,
+      taxPrice,
       totalPrice
     })
 
@@ -37,7 +38,7 @@ export const addOrderItems = asyncHandler(async (req, res) => {
 // Protected 
 
 export const getOrderById = asyncHandler(async (req, res) => {
-  const order = await Order.findById(req.params.id).populate('user', 'email')
+  const order = await Order.findById(req.params.id).populate('user', 'first_name last_name email')
 
   if (order) {
     res.json(order)
