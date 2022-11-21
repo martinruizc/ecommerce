@@ -18,6 +18,16 @@ h3 {
   margin: 0.03rem;
 }
 
+/* Orders */
+.orderStatusDanger {
+  background: #f6c3c7;
+
+}
+
+.orderStatus {
+  background: #cfe2ff;
+}
+
 
 /* Utilities */
 .lh-primary {

@@ -73,3 +73,13 @@ export const updateOrderToPaid = asyncHandler(async (req, res) => {
     throw new Error('Orden no encontrada')
   }
 })
+
+
+// Get user order
+// GET /api/orders/myorders
+// Protected 
+
+export const getMyOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ user: req.user._id })
+  res.json(orders)
+})

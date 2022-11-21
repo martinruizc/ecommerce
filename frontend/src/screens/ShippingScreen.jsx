@@ -35,23 +35,23 @@ export const ShippingScreen = () => {
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='address' className="mb-2">
           <Form.Label>Dirección</Form.Label>
-          <Form.Control type='text' placeholder='Ingrese su dirección' value={address} onChange={(e) => setAddress(e.target.value)}></Form.Control>
+          <Form.Control type='text' required placeholder='Ingrese su dirección' value={address} onChange={(e) => setAddress(e.target.value)}></Form.Control>
         </Form.Group>
 
         <Form.Group controlId='addresDetail' className="mb-2">
           <Form.Label>Detalle de la dirección (Apartamento - Callejón)</Form.Label>
-          <Form.Control type='text' placeholder='Ingrese se dirección' value={addressDetail} onChange={(e) => setAddressDetail(e.target.value)}></Form.Control>
+          <Form.Control type='text' placeholder='Detalles de la dirección' value={addressDetail} onChange={(e) => setAddressDetail(e.target.value)}></Form.Control>
         </Form.Group>
 
 
         <Form.Group controlId='country' className="mb-2">
           <Form.Label>País</Form.Label>
-          <Form.Control type='text' placeholder='Colombia' value={country} onChange={(e) => setCountry(e.target.value)}></Form.Control>
+          <Form.Control type='text' required placeholder='Colombia' value={country} onChange={(e) => setCountry(e.target.value)}></Form.Control>
         </Form.Group>
 
         <Form.Group controlId='city' className="mb-2">
           <Form.Label>Ciudad</Form.Label>
-          <Form.Control type='city' placeholder='Cali' value={city} onChange={(e) => setCity(e.target.value)}></Form.Control>
+          <Form.Control type='city' required placeholder='Cali' value={city} onChange={(e) => setCity(e.target.value)}></Form.Control>
         </Form.Group>
 
         <Form.Group controlId='hood' className="mb-2">
