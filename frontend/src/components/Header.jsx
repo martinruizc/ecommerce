@@ -37,7 +37,6 @@ export const Header = () => {
                       <NavDropdown.Item>Perfil</NavDropdown.Item>
                     </LinkContainer>
                     <NavDropdown.Item onClick={logoutHandler}>Salir</NavDropdown.Item>
-
                   </NavDropdown>
 
                 ) :
@@ -47,6 +46,26 @@ export const Header = () => {
                   </LinkContainer>
 
                 }
+
+                {userInfo && userInfo.isAdmin && (
+                  <NavDropdown title='Admin' id='adminmenu'>
+                    <LinkContainer to='/admin/orderlist'>
+                      <NavDropdown.Item>Órdenes</NavDropdown.Item>
+                    </LinkContainer>
+
+                    <LinkContainer to='/admin/productlist'>
+                      <NavDropdown.Item>Productos</NavDropdown.Item>
+                    </LinkContainer>
+
+                    <LinkContainer to='/admin/userlist'>
+                      <NavDropdown.Item>Usuarios</NavDropdown.Item>
+                    </LinkContainer>
+
+
+
+                  </NavDropdown>
+
+                )}
 
 
               </Nav>

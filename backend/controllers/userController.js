@@ -54,7 +54,6 @@ export const getUserProfile = asyncHandler(async (req, res) => {
 
 // User Update Profile 
 // PUT /api/users/profile
-
 export const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
 
@@ -125,3 +124,74 @@ export const registerUser = asyncHandler(async (req, res) => {
 
 })
 
+
+
+// GET All User
+// GET /api/users
+// Proected/Admin
+
+export const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({})
+  res.json(users)
+
+})
+
+
+// Delete User
+// DELETE /api/users/:id
+// Proected/Admin
+
+export const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id)
+  if (user) {
+    await user.remove()
+    res.json({ message: 'Usuario eliminado' })
+  } else {
+    res.status(404)
+    throw new Error('Usuario no encontrado')
+  }
+
+})
+
+
+// GET User by Id
+// GET /api/users/:id
+// Proected/Admin
+export const getUserById = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).select('-password')
+  if (user) {
+    res.json(user)
+  } else {
+    res.status(404)
+    throw new Error('Usuario no encontrado')
+  }
+})
+
+// User Update Profile 
+// PUT /api/users/:id
+// Proected/Admin
+export const updateUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id)
+
+  if (user) {
+    user.first_name = req.body.first_name || user.first_name
+    user.last_name = req.body.last_name || user.last_name
+    user.email = req.body.email || user.email
+    user.isAdmin = req.body.isAdmin
+
+    const updatedUser = await user.save()
+
+    res.json({
+      _id: updatedUser._id,
+      first_name: updatedUser.first_name,
+      last_name: updatedUser.last_name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+    })
+
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+
+})
